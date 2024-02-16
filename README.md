@@ -24,7 +24,6 @@ The Real Estate Management System API is a RESTful service using Spring Boot, Po
 ### Local Setup
 
 1. Clone the repository
-bash
-`
+```bash
 git clone http://github.com/<your-username>/realestateapi.git
-`
+```
