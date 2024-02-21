@@ -1,9 +1,8 @@
 package com.codewithej.realestateapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import jakarta.persistence.*;
+
 
 @Entity
 public class Property {
@@ -13,7 +12,8 @@ public class Property {
 
     private String address;
     private Double price;
-    private String type; // "residential" or "commercial"
+    @Enumerated(EnumType.STRING)
+    private PropertyType type;
     private Integer bedrooms;
     private Integer bathrooms;
 
@@ -44,11 +44,11 @@ public class Property {
         this.price = price;
     }
 
-    public String getType() {
+    public PropertyType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(PropertyType type) {
         this.type = type;
     }
 
