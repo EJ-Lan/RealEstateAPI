@@ -12,7 +12,7 @@
 	<artifactId>realestateapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>RealEstateAPI</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Real estate RESTful API for property and client management</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
