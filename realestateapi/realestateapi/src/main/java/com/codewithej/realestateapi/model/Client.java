@@ -8,9 +8,11 @@ import java.util.Set;
 @Entity
 public class Client extends Person{
     private String preferences;
+
     @ManyToOne
     @JoinColumn(name="agent_id")
     private Agent agent;
+
     @ManyToMany
     @JoinTable(
             name = "client_property_interest",

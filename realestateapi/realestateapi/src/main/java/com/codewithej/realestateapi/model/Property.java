@@ -9,18 +9,28 @@ public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String address;
+
     private Double price;
+
     @Enumerated(EnumType.STRING)
     private PropertyType type;
+
     @Enumerated(EnumType.STRING)
     private PropertyStatus status;
+
     private Integer bedrooms;
+
     private Integer bathrooms;
+
     private Integer squareFootage;
+
     private Integer yearBuilt;
+
     @Temporal(TemporalType.DATE)
     private Date listingDate;
+
     @ManyToOne
     @JoinColumn(name = "agent_id")
     private Agent agent;
