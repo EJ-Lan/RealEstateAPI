@@ -8,11 +8,11 @@
 		<version>3.2.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>io.github.ej-lan</groupId>
+	<groupId>com.codewithej</groupId>
 	<artifactId>realestateapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>realestateapi</name>
-	<description>A Real Estate Management System API for property listing and user management</description>
+	<name>RealEstateAPI</name>
+	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
