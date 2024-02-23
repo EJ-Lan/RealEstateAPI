@@ -19,7 +19,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
 
     List<Property> findByBedrooms(Integer bedrooms);
 
-    List<Property> findByBathroms(Integer bathrooms);
+    List<Property> findByBathrooms(Integer bathrooms);
 
     List<Property> findBySquareFootageBetween(Integer minSquareFootage, Integer maxSquareFootage);
 

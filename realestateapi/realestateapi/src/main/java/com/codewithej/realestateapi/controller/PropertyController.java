@@ -32,7 +32,7 @@ public class PropertyController {
         return ResponseEntity.ok(propertyDTO);
     }
 
-    @PutMapping("/{id")
+    @PutMapping("/{id}")
     public ResponseEntity<PropertyDTO> updateProperty(@PathVariable Long id, @RequestBody PropertyDTO propertyDTO) {
         PropertyDTO updatedProperty = propertyService.updateProperty(id, propertyDTO);
         return ResponseEntity.ok(updatedProperty);

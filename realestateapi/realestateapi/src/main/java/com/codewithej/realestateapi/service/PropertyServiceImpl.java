@@ -91,7 +91,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public List<PropertyDTO> findByBathrooms(Integer bathrooms) {
-        return propertyRepository.findByBathroms(bathrooms).stream()
+        return propertyRepository.findByBathrooms(bathrooms).stream()
                 .map(property -> modelMapper.map(property,PropertyDTO.class))
                 .collect(Collectors.toList());
     }
