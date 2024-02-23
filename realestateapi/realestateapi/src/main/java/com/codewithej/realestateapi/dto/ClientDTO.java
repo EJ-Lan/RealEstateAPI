@@ -1,5 +1,10 @@
 package com.codewithej.realestateapi.dto;
 
+import com.codewithej.realestateapi.model.Agent;
+import com.codewithej.realestateapi.model.Property;
+
+import java.util.Set;
+
 public class ClientDTO {
     private Long id;
 
@@ -10,6 +15,10 @@ public class ClientDTO {
     private String phoneNumber;
 
     private String preferences;
+
+    private Agent agent;
+
+    private Set<Property> intrestedProperties;
 
     public ClientDTO() {
     }
@@ -52,5 +61,21 @@ public class ClientDTO {
 
     public void setPreferences(String preferences) {
         this.preferences = preferences;
+    }
+
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+
+    public Set<Property> getIntrestedProperties() {
+        return intrestedProperties;
+    }
+
+    public void setIntrestedProperties(Set<Property> intrestedProperties) {
+        this.intrestedProperties = intrestedProperties;
     }
 }

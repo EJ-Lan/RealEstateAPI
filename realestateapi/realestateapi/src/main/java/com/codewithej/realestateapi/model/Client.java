@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 public class Client extends Person{
-    private String preferences;
+    private String preferences; // A Json of preferences
 
     @ManyToOne
     @JoinColumn(name="agent_id")

@@ -8,6 +8,7 @@ import com.codewithej.realestateapi.repository.PropertyRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -27,6 +28,7 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
+    @Transactional
     public PropertyDTO createProperty(PropertyDTO propertyDTO) {
         Property property = modelMapper.map(propertyDTO, Property.class);
         property = propertyRepository.save(property);
@@ -34,6 +36,7 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
+    @Transactional
     public PropertyDTO updateProperty(Long id, PropertyDTO propertyDTO) {
         Property property = propertyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Property not found with id: " + id));
@@ -43,6 +46,7 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
+    @Transactional
     public void deleteProperty(Long id) {
         propertyRepository.deleteById(id);
     }

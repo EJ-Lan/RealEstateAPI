@@ -12,12 +12,13 @@ import com.codewithej.realestateapi.repository.PropertyRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AgentServiceImpl implements AgentService{
+public class AgentServiceImpl implements AgentService {
 
     private final AgentRepository agentRepository;
 
@@ -36,6 +37,7 @@ public class AgentServiceImpl implements AgentService{
     }
 
     @Override
+    @Transactional
     public AgentDTO createAgent(AgentDTO agentDTO) {
         Agent agent = modelMapper.map(agentDTO, Agent.class);
         Agent savedAgent = agentRepository.save(agent);
@@ -43,6 +45,7 @@ public class AgentServiceImpl implements AgentService{
     }
 
     @Override
+    @Transactional
     public AgentDTO updateAgent(Long id, AgentDTO agentDTO) {
         Agent agent = agentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Agent not found with id: " + id));
@@ -52,6 +55,7 @@ public class AgentServiceImpl implements AgentService{
     }
 
     @Override
+    @Transactional
     public void deleteAgent(Long id) {
         agentRepository.deleteById(id);
     }
@@ -78,6 +82,7 @@ public class AgentServiceImpl implements AgentService{
     }
 
     @Override
+    @Transactional
     public AgentDTO addManagedProperty(Long agentId, Long propertyId) {
         Agent agent = agentRepository.findById(agentId)
                 .orElseThrow(() -> new RuntimeException("Agent not found with id: " + agentId));
@@ -89,6 +94,7 @@ public class AgentServiceImpl implements AgentService{
     }
 
     @Override
+    @Transactional
     public AgentDTO addClient(Long agentId, Long clientId) {
         Agent agent = agentRepository.findById(agentId)
                 .orElseThrow(() -> new RuntimeException("Agent not found with id: " + agentId));
