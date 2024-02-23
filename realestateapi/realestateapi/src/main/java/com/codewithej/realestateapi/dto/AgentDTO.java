@@ -1,6 +1,7 @@
 package com.codewithej.realestateapi.dto;
 
 import java.util.List;
+import java.util.Set;
 
 public class AgentDTO {
     private Long id;
@@ -12,6 +13,8 @@ public class AgentDTO {
     private String phoneNumber;
 
     private List<Long> managedPropertyIds;
+
+    private Set<ClientDTO> clients;
 
     public AgentDTO() {
     }
@@ -54,5 +57,13 @@ public class AgentDTO {
 
     public void setManagedPropertyIds(List<Long> managedPropertyIds) {
         this.managedPropertyIds = managedPropertyIds;
+    }
+
+    public Set<ClientDTO> getClients() {
+        return clients;
+    }
+
+    public void setClients(Set<ClientDTO> clients) {
+        this.clients = clients;
     }
 }

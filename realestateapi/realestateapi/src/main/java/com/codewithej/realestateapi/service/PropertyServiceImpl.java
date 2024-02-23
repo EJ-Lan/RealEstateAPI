@@ -36,7 +36,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public PropertyDTO updateProperty(Long id, PropertyDTO propertyDTO) {
         Property property = propertyRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("Property not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Property not found with id: " + id));
         modelMapper.map(propertyDTO, property); // Update the entity with DTO data
         property = propertyRepository.save(property);
         return modelMapper.map(property, PropertyDTO.class);
@@ -50,7 +50,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public PropertyDTO getPropertyById(Long id) {
         Property property = propertyRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("Property not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Property not found with id: " + id));
         return modelMapper.map(property, PropertyDTO.class);
     }
 
