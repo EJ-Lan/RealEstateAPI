@@ -95,6 +95,4 @@ public class PropertyController {
         List<PropertyDTO> properties = propertyService.findByListingDateAfter(date);
         return ResponseEntity.ok(properties);
     }
-
-
 }
