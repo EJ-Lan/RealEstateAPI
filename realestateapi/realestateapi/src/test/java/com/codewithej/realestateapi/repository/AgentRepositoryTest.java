@@ -34,17 +34,15 @@ public class AgentRepositoryTest {
     }
 
     @Test
-    public void whenFindById_thenReturnAgent() {
+    public void whenFindByIdThenReturnAgent() {
         Agent foundAgent = agentRepository.findById(agent.getId()).orElse(null);
-
         assertThat(foundAgent).isNotNull();
         assertThat(foundAgent.getName()).isEqualTo(agent.getName());
     }
 
     @Test
-    public void whenFindByNameContainingIgnoreCase_thenReturnAgents() {
+    public void whenFindByNameContainingIgnoreCaseThenReturnAgents() {
         List<Agent> foundAgents = agentRepository.findByNameContainingIgnoreCase("john");
-
         assertThat(foundAgents).hasSize(1);
         assertThat(foundAgents.get(0).getName()).isEqualToIgnoringCase("john doe");
     }
