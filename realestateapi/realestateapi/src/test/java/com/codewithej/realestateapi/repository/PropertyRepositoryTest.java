@@ -39,49 +39,49 @@ public class PropertyRepositoryTest {
     }
 
     @Test
-    public void findByStatusTest() {
+    public void shouldFindPropertiesByStatus() {
         List<Property> result = propertyRepository.findByStatus(PropertyStatus.AVAILABLE);
         assertFalse(result.isEmpty());
         assertEquals(PropertyStatus.AVAILABLE, result.get(0).getStatus());
     }
 
     @Test
-    public void findByTypeTest() {
+    public void shouldFindPropertiesByType() {
         List<Property> result = propertyRepository.findByType(PropertyType.RESIDENTIAL);
         assertFalse(result.isEmpty());
         assertEquals(PropertyType.RESIDENTIAL, result.get(0).getType());
     }
 
     @Test
-    public void findByPriceBetweenTest() {
+    public void shouldFindPropertiesWithinPriceRange() {
         List<Property> result = propertyRepository.findByPriceBetween(150000.0, 250000.0);
         assertFalse(result.isEmpty());
         assertTrue(result.get(0).getPrice() >= 150000.0 && result.get(0).getPrice() <= 250000.0);
     }
 
     @Test
-    public void findByBedroomsTest() {
+    public void shouldFindPropertiesByNumberOfBedrooms() {
         List<Property> result = propertyRepository.findByBedrooms(3);
         assertFalse(result.isEmpty());
         assertEquals(3, result.get(0).getBedrooms());
     }
 
     @Test
-    public void findByBathroomsTest() {
+    public void shouldFindPropertiesByNumberOfBathrooms() {
         List<Property> result = propertyRepository.findByBathrooms(2);
         assertFalse(result.isEmpty());
         assertEquals(2, result.get(0).getBathrooms());
     }
 
     @Test
-    public void findBySquareFootageBetweenTest() {
+    public void shouldFindPropertiesWithinSquareFootageRange() {
         List<Property> result = propertyRepository.findBySquareFootageBetween(1000, 1300);
         assertFalse(result.isEmpty());
         assertTrue(result.get(0).getSquareFootage() >= 1000 && result.get(0).getSquareFootage() <= 1300);
     }
 
     @Test
-    public void findByListingDateAfterTest() {
+    public void shouldFindPropertiesListedAfterSpecificDate() {
         Date oneDayBefore = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000); // 1 day before now
         List<Property> result = propertyRepository.findByListingDateAfter(oneDayBefore);
         assertFalse(result.isEmpty());

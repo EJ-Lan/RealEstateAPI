@@ -63,7 +63,7 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void createProperty_ShouldSavePropertyCorrectly() {
+    void createPropertyShouldSavePropertyCorrectly() {
         when(propertyRepository.save(any(Property.class))).thenReturn(property);
 
         PropertyDTO result = propertyService.createProperty(propertyDTO);
@@ -72,7 +72,7 @@ public class PropertyServiceTest {
         verify(propertyRepository, times(1)).save(any(Property.class));
     }
 
-    @Test void updateProperty_ShouldUpdatePropertyCorrectly() {
+    @Test void updatePropertyShouldUpdatePropertyCorrectly() {
         when(propertyRepository.findById(anyLong())).thenReturn(java.util.Optional.of(property));
         when(propertyRepository.save(any(Property.class))).thenReturn(property);
 
@@ -85,7 +85,7 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void deleteProperty_ShouldDeletePropertyCorrectly() {
+    void deletePropertyShouldDeletePropertyCorrectly() {
         doNothing().when(propertyRepository).deleteById(anyLong());
 
         propertyService.deleteProperty(1L);
@@ -94,7 +94,7 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void getAllProperties_ShouldReturnListOfProperties() {
+    void getAllPropertiesShouldReturnListOfProperties() {
         when(propertyRepository.findAll()).thenReturn(Collections.singletonList(property));
 
         List<PropertyDTO> result = propertyService.getAllProperties();
@@ -104,7 +104,7 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void findByStatus_ShouldReturnFilteredProperties() {
+    void findByStatusShouldReturnFilteredProperties() {
         when(propertyRepository.findByStatus(PropertyStatus.AVAILABLE))
                 .thenReturn(Collections.singletonList(property));
 
@@ -116,7 +116,7 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void findByType_ShouldReturnFilteredProperties() {
+    void findByTypeShouldReturnFilteredProperties() {
         when(propertyRepository.findByType(PropertyType.RESIDENTIAL))
                 .thenReturn(Collections.singletonList(property));
 
@@ -128,7 +128,7 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void findByPriceRange_ShouldReturnFilteredProperties() {
+    void findByPriceRangeShouldReturnFilteredProperties() {
         Double minPrice = 200000.00;
         Double maxPrice = 300000.00;
         when(propertyRepository.findByPriceBetween(minPrice, maxPrice))
@@ -142,7 +142,7 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void findByBedrooms_ShouldReturnPropertiesWithGivenBedrooms() {
+    void findByBedroomsShouldReturnPropertiesWithGivenBedrooms() {
         int bedrooms = 3;
         when(propertyRepository.findByBedrooms(bedrooms))
                 .thenReturn(Collections.singletonList(property));
@@ -155,7 +155,7 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void findByBathrooms_ShouldReturnPropertiesWithGivenBathrooms() {
+    void findByBathroomsShouldReturnPropertiesWithGivenBathrooms() {
         int bathrooms = 2;
         when(propertyRepository.findByBathrooms(bathrooms))
                 .thenReturn(Collections.singletonList(property));
@@ -168,7 +168,7 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void findBySquareFootageRange_ShouldReturnPropertiesWithinRange() {
+    void findBySquareFootageRangeShouldReturnPropertiesWithinRange() {
         int minSquareFootage = 1000;
         int maxSquareFootage = 2000;
         when(propertyRepository.findBySquareFootageBetween(minSquareFootage, maxSquareFootage))
@@ -182,7 +182,7 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void findByListingDateAfter_ShouldReturnPropertiesListedAfterGivenDate() {
+    void findByListingDateAfterShouldReturnPropertiesListedAfterGivenDate() {
         Date date = new Date();
         when(propertyRepository.findByListingDateAfter(date))
                 .thenReturn(Collections.singletonList(property));

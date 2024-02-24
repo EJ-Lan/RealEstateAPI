@@ -59,7 +59,7 @@ public class PropertyControllerTest {
     }
 
     @Test
-    void createProperty_ShouldReturnCreatedProperty() throws Exception {
+    void createPropertyShouldReturnCreatedProperty() throws Exception {
         given(propertyService.createProperty(any(PropertyDTO.class))).willReturn(propertyDTO);
 
         mockMvc.perform(post("/api/properties")
@@ -71,7 +71,7 @@ public class PropertyControllerTest {
     }
 
     @Test
-    void getPropertyById_ShouldReturnProperty() throws Exception {
+    void getPropertyByIdShouldReturnProperty() throws Exception {
         given(propertyService.getPropertyById(any(Long.class))).willReturn(propertyDTO);
 
         mockMvc.perform(get("/api/properties/{id}", propertyDTO.getId()))
@@ -81,7 +81,7 @@ public class PropertyControllerTest {
     }
 
     @Test
-    void updateProperty_ShouldReturnUpdatedProperty() throws Exception {
+    void updatePropertyShouldReturnUpdatedProperty() throws Exception {
         PropertyDTO updatedPropertyDTO = new PropertyDTO();
         updatedPropertyDTO.setAddress("Updated Address");
         given(propertyService.updateProperty(anyLong(), any(PropertyDTO.class))).willReturn(updatedPropertyDTO);
@@ -94,7 +94,7 @@ public class PropertyControllerTest {
     }
 
     @Test
-    void deleteProperty_ShouldReturnNoContent() throws Exception {
+    void deletePropertyShouldReturnNoContent() throws Exception {
         mockMvc.perform(delete("/api/properties/{id}", propertyDTO.getId()))
                 .andExpect(status().isNoContent());
 
@@ -102,7 +102,7 @@ public class PropertyControllerTest {
     }
 
     @Test
-    void getAllProperties_ShouldReturnListOfProperties() throws Exception {
+    void getAllPropertiesShouldReturnListOfProperties() throws Exception {
         given(propertyService.getAllProperties()).willReturn(Collections.singletonList(propertyDTO));
 
         mockMvc.perform(get("/api/properties"))
@@ -112,7 +112,7 @@ public class PropertyControllerTest {
     }
 
     @Test
-    void findByStatus_ShouldReturnFilteredProperties() throws Exception {
+    void findByStatusShouldReturnFilteredProperties() throws Exception {
         given(propertyService.findByStatus(PropertyStatus.AVAILABLE)).willReturn(Collections.singletonList(propertyDTO));
 
         mockMvc.perform(get("/api/properties/status/{status}", PropertyStatus.AVAILABLE))
@@ -122,7 +122,7 @@ public class PropertyControllerTest {
     }
 
     @Test
-    void findByType_ShouldReturnFilteredProperties() throws Exception {
+    void findByTypeShouldReturnFilteredProperties() throws Exception {
         given(propertyService.findByType(PropertyType.RESIDENTIAL)).willReturn(Collections.singletonList(propertyDTO));
 
         mockMvc.perform(get("/api/properties/type/{type}", PropertyType.RESIDENTIAL))
@@ -132,7 +132,7 @@ public class PropertyControllerTest {
     }
 
     @Test
-    void findByBedrooms_ShouldReturnFilteredProperties() throws Exception {
+    void findByBedroomsShouldReturnFilteredProperties() throws Exception {
         given(propertyService.findByBedrooms(3)).willReturn(Collections.singletonList(propertyDTO));
 
         mockMvc.perform(get("/api/properties/bedrooms/{bedrooms}", 3))
@@ -142,7 +142,7 @@ public class PropertyControllerTest {
     }
 
     @Test
-    void findByBathrooms_ShouldReturnFilteredProperties() throws Exception {
+    void findByBathroomsShouldReturnFilteredProperties() throws Exception {
         given(propertyService.findByBathrooms(2)).willReturn(Collections.singletonList(propertyDTO));
 
         mockMvc.perform(get("/api/properties/bathrooms/{bathrooms}", 2))
@@ -152,7 +152,7 @@ public class PropertyControllerTest {
     }
 
     @Test
-    void findByPriceRange_ShouldReturnFilteredProperties() throws Exception {
+    void findByPriceRangeShouldReturnFilteredProperties() throws Exception {
         given(propertyService.findByPriceRange(200000.0, 300000.0)).willReturn(Collections.singletonList(propertyDTO));
 
         mockMvc.perform(get("/api/properties/price")
@@ -164,7 +164,7 @@ public class PropertyControllerTest {
     }
 
     @Test
-    void findBySquareFootageRange_ShouldReturnFilteredProperties() throws Exception {
+    void findBySquareFootageRangeShouldReturnFilteredProperties() throws Exception {
         given(propertyService.findBySquareFootageRange(1000, 2000)).willReturn(Collections.singletonList(propertyDTO));
 
         mockMvc.perform(get("/api/properties/squareFootage")
@@ -176,7 +176,7 @@ public class PropertyControllerTest {
     }
 
     @Test
-    void findByListingDateAfter_ShouldReturnFilteredProperties() throws Exception {
+    void findByListingDateAfterShouldReturnFilteredProperties() throws Exception {
         Date testDate = new SimpleDateFormat("yyyy-MM-dd").parse("2023-01-01");
         PropertyDTO testPropertyDTO = new PropertyDTO();
         List<PropertyDTO> testProperties = Collections.singletonList(testPropertyDTO);
