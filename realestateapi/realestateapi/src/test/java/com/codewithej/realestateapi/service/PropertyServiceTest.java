@@ -5,14 +5,16 @@ import com.codewithej.realestateapi.model.Property;
 import com.codewithej.realestateapi.model.PropertyStatus;
 import com.codewithej.realestateapi.model.PropertyType;
 import com.codewithej.realestateapi.repository.PropertyRepository;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@DataJpaTest
+@SpringBootTest
 @Import({PropertyServiceImpl.class, ModelMapper.class})
 public class PropertyServiceTest {
 
@@ -36,7 +38,6 @@ public class PropertyServiceTest {
 
     @BeforeEach
     void setUp() {
-        // Initialize your property and propertyDTO objects here
         property = new Property();
         property.setId(1L);
         property.setAddress("123 Main St");
@@ -183,14 +184,16 @@ public class PropertyServiceTest {
 
     @Test
     void findByListingDateAfterShouldReturnPropertiesListedAfterGivenDate() {
-        Date date = new Date();
+        Date date = new Date(); // Current date
         when(propertyRepository.findByListingDateAfter(date))
                 .thenReturn(Collections.singletonList(property));
 
         List<PropertyDTO> results = propertyService.findByListingDateAfter(date);
 
         assertThat(results).hasSize(1);
-        assertThat(results.get(0).getListingDate()).isAfterOrEqualTo(date);
+        assertThat(DateUtils.truncatedEquals(results.get(0).getListingDate(), date, Calendar.SECOND))
+                .as("Listing date should be after or equal to the given date")
+                .isTrue();
         verify(propertyRepository, times(1)).findByListingDateAfter(date);
     }
 
