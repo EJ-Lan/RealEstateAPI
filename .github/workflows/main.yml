@@ -1,0 +1,35 @@
+name: CI/CD with Docker and Tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '17'
+
+    - name: Build with Maven
+      run: mvn -B clean package
+
+    - name: Run Tests
+      run: mvn test
+
+    - name: Dockerize Application
+      run: |
+        docker build -t ervinjon/realestateapi .
+        docker login -u ervinjon -p ${{ secrets.DOCKERHUB_TOKEN }}
+        docker push ervinjon/realestateapi
+      env:
+        DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
