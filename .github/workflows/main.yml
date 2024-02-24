@@ -32,6 +32,7 @@ jobs:
 
     - name: Dockerize Application
       run: |
+        cd realestateapi/realestateapi
         docker build -t ervinjon/realestateapi .
         docker login -u ervinjon -p ${{ secrets.DOCKERHUB_TOKEN }}
         docker push ervinjon/realestateapi
