@@ -1,7 +1,6 @@
 package com.codewithej.realestateapi.service;
 
 import com.codewithej.realestateapi.dto.ClientDTO;
-import com.codewithej.realestateapi.repository.ClientRepository;
 
 import java.util.List;
 import java.util.Set;
