@@ -19,6 +19,9 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: '17'
+        
+    - name: List contents of the directory
+      run: ls RealEstateAPI/realestateapi/realestateapi
 
     - name: Build with Maven
       run: |
