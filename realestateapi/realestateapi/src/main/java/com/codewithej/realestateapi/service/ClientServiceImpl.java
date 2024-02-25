@@ -92,7 +92,12 @@ public class ClientServiceImpl implements ClientService {
                 .orElseThrow(() -> new RuntimeException("Agent not found with id: " + agentId));
         client.setAgent(agent);
         Client updatedClient = clientRepository.save(client);
-        return modelMapper.map(updatedClient, ClientDTO.class);
+
+        if (updatedClient != null) {
+            return modelMapper.map(updatedClient, ClientDTO.class);
+        } else {
+            throw new RuntimeException("Failed to update client with id: " + clientId);
+        }
     }
 
     @Override
