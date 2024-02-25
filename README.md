@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-The Real Estate Management System API is a RESTful service using Spring Boot, PostgreSQL, and Docker, with deployment on AWS. This API provides functionalities for managing property listings and user authentication.
+The Real Estate Management System API is a RESTful service using Spring Boot, PostgreSQL, and Docker, with deployment on AWS. This API provides functionalities for managing property listings.
 
 ### Key Features
 
