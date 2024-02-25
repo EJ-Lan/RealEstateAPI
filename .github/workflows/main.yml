@@ -100,4 +100,4 @@ jobs:
         
     - name: Run Docker Container on EC2
       run: |
-        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_INSTANCE_PUBLIC_IP }} 'docker run -d -p 8000:8080 ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/realestateapi:latest'
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_INSTANCE_PUBLIC_IP }} 'docker run -d -p 8080:8080 ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/realestateapi:latest'
