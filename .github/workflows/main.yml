@@ -84,7 +84,12 @@ jobs:
  
     - name: Stop and Remove Existing Docker Containers
       run: |
-        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_INSTANCE_PUBLIC_IP }} 'docker stop $(docker ps -aq) && docker rm $(docker ps -aq)'
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_INSTANCE_PUBLIC_IP }} '
+        CONTAINER_IDS=$(docker ps -aq)
+        if [ -n "$CONTAINER_IDS" ]; then
+        docker stop $CONTAINER_IDS
+        docker rm $CONTAINER_IDS
+        fi'
         
     - name: Pull Docker Image on EC2
       run: |
