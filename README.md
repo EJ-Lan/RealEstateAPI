@@ -2,14 +2,20 @@
 
 ## Project Overview
 
-The Real Estate Management System API is a RESTful service using Spring Boot, PostgreSQL, and Docker, with deployment on AWS. This API provides functionalities for managing property listings and user authentication.
+The Real Estate Management System API is a RESTful service using Spring Boot, PostgreSQL, and Docker, with deployment on AWS. This API provides functionalities for managing property listings.
 
 ### Key Features
 
-* CRUD operations for property listings
-* User registration and login
-* Basic property search with filters
+* CRUD operations for property, agent, and client
 * Secure endpoints with basic authentication
+* Layered Architecture Pattern
+* Dockerized application
+* Tests for controller, repository, and service classes
+* H2 database for tests
+* Connection to AWS RDS with PostgreSQL for the main database
+* Docker image stored in AWS ECR (Elastic Container Registry)
+* Deployment of Dockerized application from AWS ECR to AWS EC2
+* CI/CD workflow for automated testing, building, and deployment with GitHub Actions
 
 ## Getting Started
 
@@ -72,4 +78,4 @@ This project includes a GitHub Actions workflow for automated testing, building,
 
 1. **AWS RDS**: Set up a PostgreSQL instance on RDS and update your application's production configuration to use this database.
 2. **AWS ECR**: Push your Docker image to an Elastic Container Registry repository.
-3. **AWS ECS**: Deploy your application using Elastic Container Service by creating a task definition that references your Docker image in ECR
+3. **AWS EC2**: Application should be deployed to an EC2 instance.
