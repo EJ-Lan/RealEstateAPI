@@ -1,4 +1,4 @@
-name: CI/CD with Docker and Tests
+name: CI/CD with Docker, Tests, Docker Hub, ECR, and EC2 Deployment
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  build-and-test:
-    name: Build and Test
+  build-test-docker:
+    name: Build, Test, and Push Docker Image
     runs-on: ubuntu-latest
 
     steps:
@@ -30,11 +30,45 @@ jobs:
         cd realestateapi/realestateapi
         mvn test
 
-    - name: Dockerize Application
+    - name: Dockerize Application and Push to Docker Hub
       run: |
         cd realestateapi/realestateapi
-        docker build -t ervinjon/realestateapi .
-        docker login -u ervinjon -p ${{ secrets.DOCKERHUB_TOKEN }}
-        docker push ervinjon/realestateapi
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/realestateapi .
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/realestateapi
+
+  ecr-ec2-deployment:
+    name: ECR and EC2 Deployment
+    runs-on: ubuntu-latest
+    needs: build-test-docker
+
+    steps:
+    - name: Install AWS CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y awscli
+
+    - name: Pull Docker Image from Docker Hub
+      run: |
+        docker pull ${{ secrets.DOCKER_USERNAME }}/realestateapi
+
+    - name: Authenticate Docker to ECR
+      run: |
+        aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+
+    - name: Tag Docker Image for ECR
+      run: |
+        docker tag ${{ secrets.DOCKER_USERNAME }}/realestateapi:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/realestateapi:latest
+
+    - name: Push Docker Image to ECR
+      run: |
+        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/realestateapi:latest
+
+    - name: SSH into EC2 and Deploy Docker Image
+      run: |
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_INSTANCE_PUBLIC_IP }} 'docker pull ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/realestateapi:latest && docker run -d -p 8080:8080 ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/realestateapi:latest'
       env:
-        DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
