@@ -9,14 +9,11 @@ import com.codewithej.realestateapi.repository.ClientRepository;
 import com.codewithej.realestateapi.repository.PropertyRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -133,7 +130,6 @@ public class ClientServiceTest {
 
     @Test
     void setClientAgentShouldAssociateAgentCorrectly() {
-        // Arrange: Ensure the client and agent are properly set up and mocked
         Long clientId = 1L;
         Long agentId = 1L;
         Client expectedClient = new Client();
@@ -144,15 +140,12 @@ public class ClientServiceTest {
         when(agentRepository.findById(agentId)).thenReturn(Optional.of(agent));
         when(clientRepository.save(any(Client.class))).thenReturn(expectedClient);
 
-        // Act
         ClientDTO result = clientService.setClientAgent(clientId, agentId);
 
-        // Assert
         assertThat(result).isNotNull();
         assertThat(result.getAgent()).isNotNull();
         assertThat(result.getAgent().getId()).isEqualTo(agentId);
 
-        // Verify the interactions
         verify(clientRepository).findById(clientId);
         verify(agentRepository).findById(agentId);
         verify(clientRepository).save(any(Client.class));
