@@ -78,6 +78,14 @@ jobs:
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
 
+    - name: Cleanup Unused Docker Images on EC2
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_INSTANCE_PUBLIC_IP }} 'docker image prune -af'
+        
+    - name: Stop and Remove Existing Docker Containers
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_INSTANCE_PUBLIC_IP }} 'docker stop $(docker ps -aq) && docker rm $(docker ps -aq)'
+        
     - name: Pull Docker Image on EC2
       run: |
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_INSTANCE_PUBLIC_IP }} '
