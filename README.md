@@ -78,4 +78,4 @@ This project includes a GitHub Actions workflow for automated testing, building,
 
 1. **AWS RDS**: Set up a PostgreSQL instance on RDS and update your application's production configuration to use this database.
 2. **AWS ECR**: Push your Docker image to an Elastic Container Registry repository.
-3. **AWS EC2**: Application should be deployed to an EC2 instance
+3. **AWS EC2**: Application should be deployed to an EC2 instance.
