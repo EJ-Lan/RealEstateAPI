@@ -33,5 +33,5 @@ build/
 ### VS Code ###
 .vscode/
 
-# Ignore external configuration files with sensitive information
-application-secrets.properties
+# Ignore secrets properties file
+secrets.properties
