@@ -14,6 +14,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of the {@link PropertyService} interface.
+ * <p>
+ * Handles business logic for property operations, including CRUD functionalities
+ * and search functionalities based on various criteria. Utilizes {@link PropertyRepository}
+ * for data access.
+ * </p>
+ */
 @Service
 public class PropertyServiceImpl implements PropertyService {
 
@@ -21,6 +29,12 @@ public class PropertyServiceImpl implements PropertyService {
 
     private final ModelMapper modelMapper;
 
+    /**
+     * Constructs a {@code PropertyServiceImpl} with necessary dependencies.
+     *
+     * @param propertyRepository  Repository for property data access.
+     * @param modelMapper         Utility for entity-DTO mapping.
+     */
     @Autowired
     public PropertyServiceImpl(PropertyRepository propertyRepository, ModelMapper modelMapper) {
         this.propertyRepository = propertyRepository;

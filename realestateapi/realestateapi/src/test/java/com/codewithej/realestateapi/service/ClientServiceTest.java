@@ -169,7 +169,7 @@ public class ClientServiceTest {
     @Test
     void getInterestedPropertiesShouldReturnSetOfClients() {
         when(clientRepository.findById(anyLong())).thenReturn(Optional.of(client));
-        client.setIntrestedProperties(interestedProperties);
+        client.setInterestedProperties(interestedProperties);
 
         Set<ClientDTO> resultProperties = clientService.getInterestedProperties(client.getId());
 

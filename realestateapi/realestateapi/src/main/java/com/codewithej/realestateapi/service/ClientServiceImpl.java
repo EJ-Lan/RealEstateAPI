@@ -16,6 +16,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of the {@link ClientService} interface.
+ * <p>
+ * Handles business logic for client operations, including CRUD functionalities and relationships
+ * with agents and properties. Utilizes {@link ClientRepository}, {@link AgentRepository},
+ * and {@link PropertyRepository} for data access.
+ * </p>
+ */
 @Service
 public class ClientServiceImpl implements ClientService {
 
@@ -27,6 +35,14 @@ public class ClientServiceImpl implements ClientService {
 
     private final ModelMapper modelMapper;
 
+    /**
+     * Constructs a {@code ClientServiceImpl} with necessary dependencies.
+     *
+     * @param clientRepository    Repository for client data access.
+     * @param agentRepository     Repository for agent data access.
+     * @param propertyRepository  Repository for property data access.
+     * @param modelMapper         Utility for entity-DTO mapping.
+     */
     @Autowired
     public ClientServiceImpl(ClientRepository clientRepository, AgentRepository agentRepository, PropertyRepository propertyRepository, ModelMapper modelMapper) {
         this.clientRepository = clientRepository;
@@ -108,7 +124,7 @@ public class ClientServiceImpl implements ClientService {
         Set<Property> properties = propertyIds.stream()
                 .map(id -> propertyRepository.findById(id).orElseThrow(() -> new RuntimeException("Property not found with id: " + id)))
                 .collect(Collectors.toSet());
-        client.setIntrestedProperties(properties);
+        client.setInterestedProperties(properties);
         clientRepository.save(client);
         return properties.stream()
                 .map(property -> modelMapper.map(property, ClientDTO.class))
@@ -119,7 +135,7 @@ public class ClientServiceImpl implements ClientService {
     public Set<ClientDTO> getInterestedProperties(Long clientId) {
         Client client = clientRepository.findById(clientId)
                 .orElseThrow(() -> new RuntimeException("Client not found with id: " + clientId));
-        Set<Property> interestedProperties = client.getIntrestedProperties();
+        Set<Property> interestedProperties = client.getInterestedProperties();
         return interestedProperties.stream()
                 .map(property -> modelMapper.map(property, ClientDTO.class))
                 .collect(Collectors.toSet());

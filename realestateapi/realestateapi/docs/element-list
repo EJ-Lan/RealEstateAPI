@@ -1,0 +1,8 @@
+com.codewithej.realestateapi
+com.codewithej.realestateapi.config
+com.codewithej.realestateapi.controller
+com.codewithej.realestateapi.dto
+com.codewithej.realestateapi.exception
+com.codewithej.realestateapi.model
+com.codewithej.realestateapi.repository
+com.codewithej.realestateapi.service

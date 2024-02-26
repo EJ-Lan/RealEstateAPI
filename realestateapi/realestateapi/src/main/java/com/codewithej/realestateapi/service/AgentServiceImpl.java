@@ -17,6 +17,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of the {@link AgentService} interface.
+ * <p>
+ * Handles business logic for agent operations, including CRUD functionalities and relationships
+ * with properties and clients. Utilizes {@link AgentRepository}, {@link PropertyRepository},
+ * and {@link ClientRepository} for data access.
+ * </p>
+ */
 @Service
 public class AgentServiceImpl implements AgentService {
 
@@ -28,6 +36,14 @@ public class AgentServiceImpl implements AgentService {
 
     private final ModelMapper modelMapper;
 
+    /**
+     * Constructs an {@code AgentServiceImpl} with necessary dependencies.
+     *
+     * @param agentRepository     Repository for agent data access.
+     * @param propertyRepository  Repository for property data access.
+     * @param clientRepository    Repository for client data access.
+     * @param modelMapper         Utility for entity-DTO mapping.
+     */
     @Autowired
     public AgentServiceImpl(AgentRepository agentRepository, PropertyRepository propertyRepository, ClientRepository clientRepository, ModelMapper modelMapper) {
         this.agentRepository = agentRepository;
