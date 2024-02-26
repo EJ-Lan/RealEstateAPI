@@ -70,12 +70,32 @@ Execute unit and integration tests by running:
 mvn test
 ```
 
-## CI/CD with GitHub Actions
+## Workflow
 
-This project includes a GitHub Actions workflow for automated testing, building, and pushing the Docker image to AWS ECR. The workflow is defined in `.github/workflows/main.yml`.
+This project incorporates a CI/CD workflow utilizing GitHub Actions, outlined in `.github/workflows/main.yml`. The workflow automates testing, building, Docker image creation, and deployment processes across multiple environments. Here's a breakdown of what each part of the workflow accomplishes:
 
-## Deployment to AWS
+### Build, Test, and Push Docker Image
 
-1. **AWS RDS**: Set up a PostgreSQL instance on RDS and update your application's production configuration to use this database.
-2. **AWS ECR**: Push your Docker image to an Elastic Container Registry repository.
-3. **AWS EC2**: Application should be deployed to an EC2 instance.
+- **Checkout Code**: The workflow starts by checking out the latest code from the main branch.
+- **Set up JDK 17**: Prepares the environment to use Java Development Kit version 17, ensuring compatibility with the project's Java version.
+- **Build with Maven**: Executes the Maven build lifecycle, including compiling source code and packaging the binary into a JAR file.
+- **Run Tests**: Runs unit and integration tests to ensure code changes haven't introduced regressions.
+- **Dockerize Application and Push to Docker Hub**: Builds a Docker image for the application and pushes it to Docker Hub, making the image available for deployment.
+
+### ECR and EC2 Deployment
+
+- **Install AWS CLI**: Installs the AWS Command Line Interface, which is essential for interacting with AWS services.
+- **Configure AWS CLI**: Sets up the AWS CLI with the necessary credentials and default region, enabling access to AWS resources.
+- **Pull Docker Image from Docker Hub**: Pulls the latest Docker image from Docker Hub to ensure the deployment uses the most recent version of the application.
+- **Authenticate Docker to ECR**: Logs in to Amazon ECR with Docker, allowing Docker to push and pull images from ECR.
+- **Tag Docker Image for ECR**: Tags the Docker image pulled from Docker Hub for pushing to Amazon ECR.
+- **Push Docker Image to ECR**: Pushes the tagged Docker image to a repository in Amazon ECR, making it available for deployment on AWS.
+- **Create SSH directory and Write Private Key**: Prepares for SSH connections to the EC2 instance by setting up SSH keys.
+- **Cleanup Unused Docker Images on EC2**: Connects to the EC2 instance and removes any unused Docker images to free up space.
+- **Stop and Remove Existing Docker Containers**: Stops any running containers of the application on the EC2 instance and removes them, ensuring that the new deployment will start fresh.
+- **Pull Docker Image on EC2**: Pulls the latest Docker image from Amazon ECR to the EC2 instance.
+- **Cleanup Previous Docker Containers**: Removes any previous containers of the application to avoid conflicts with the new deployment.
+- **Run Docker Container on EC2**: Starts a new Docker container with the application on the EC2 instance, mapping the container port to the host port as specified.
+- **Continuous Cleanup of Old Docker Images**: After deploying the new Docker container, this step cleans up old Docker images on the EC2 instance. It first removes all unused (dangling) images and then removes any images not currently used by running containers. This step ensures optimal disk space usage by retaining only the necessary Docker images.
+
+This CI/CD workflow ensures that every push to the main branch triggers an automated sequence of actions that test, build, and deploy the latest version of the application, facilitating continuous integration and continuous deployment practices.
