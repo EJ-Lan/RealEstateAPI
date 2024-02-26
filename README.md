@@ -57,7 +57,7 @@ The API will be available at `http://localhost:8080`.
 
 1. Build the Docker Image
 ```bash
-docker build -t realestateapi .`
+docker build -t realestateapi .
 ```
 2. Run the application using Docker
 ```bash
