@@ -9,6 +9,7 @@ The Real Estate Management System API is a RESTful service using Spring Boot, Po
 * CRUD operations for property, agent, and client
 * Secure endpoints with basic authentication
 * Layered Architecture Pattern
+* JavaDocs for documentation
 * Dockerized application
 * Tests for controller, repository, and service classes
 * H2 database for tests
