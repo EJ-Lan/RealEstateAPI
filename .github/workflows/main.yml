@@ -106,3 +106,9 @@ jobs:
     - name: Run Docker Container on EC2
       run: |
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_INSTANCE_PUBLIC_IP }} 'docker run -d -p 8080:8080 ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/realestateapi:latest'
+
+    - name: Continuous Cleanup of Old Docker Images
+      run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_INSTANCE_PUBLIC_IP }} '
+          docker image prune -af # Remove dangling and unused images first
+          docker images --format "{{.Repository}}:{{.Tag}}" | grep -v $(docker ps --format "{{.Image}}") | xargs -r docker rmi'
