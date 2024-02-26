@@ -96,5 +96,6 @@ This project incorporates a CI/CD workflow utilizing GitHub Actions, outlined in
 - **Pull Docker Image on EC2**: Pulls the latest Docker image from Amazon ECR to the EC2 instance.
 - **Cleanup Previous Docker Containers**: Removes any previous containers of the application to avoid conflicts with the new deployment.
 - **Run Docker Container on EC2**: Starts a new Docker container with the application on the EC2 instance, mapping the container port to the host port as specified.
+- **Continuous Cleanup of Old Docker Images**: After deploying the new Docker container, this step cleans up old Docker images on the EC2 instance. It first removes all unused (dangling) images and then removes any images not currently used by running containers. This step ensures optimal disk space usage by retaining only the necessary Docker images.
 
 This CI/CD workflow ensures that every push to the main branch triggers an automated sequence of actions that test, build, and deploy the latest version of the application, facilitating continuous integration and continuous deployment practices.
