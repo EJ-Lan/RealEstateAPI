@@ -18,6 +18,50 @@ The Real Estate Management System API is a RESTful service using Spring Boot, Po
 * Deployment of Dockerized application from AWS ECR to AWS EC2
 * CI/CD workflow for automated testing, building, and deployment with GitHub Actions
 
+## Accessing the Deployed API
+
+The deployed API is accessible at `http://54.92.236.158:8080/api`. The API is secured with basic authentication, requiring a username and password for access.
+
+### Authentication Details
+
+- **Username**: `user`
+- **Password**: `password`
+
+Please replace the above credentials with the actual ones for your API.
+
+### Endpoints
+
+Here are some of the available endpoints:
+
+- **Agents**:
+  - `POST /api/agents` - Creates a new agent.
+  - `GET /api/agents/{id}` - Retrieves an agent by ID.
+  - `PUT /api/agents/{id}` - Updates an existing agent.
+  - `DELETE /api/agents/{id}` - Deletes an agent by ID.
+  - `GET /api/agents` - Retrieves all agents.
+
+- **Clients**:
+  - `POST /api/clients` - Creates a new client.
+  - `GET /api/clients/{id}` - Retrieves a client by ID.
+  - `PUT /api/clients/{id}` - Updates an existing client.
+  - `DELETE /api/clients/{id}` - Deletes a client by ID.
+  - `GET /api/clients` - Retrieves all clients.
+
+- **Properties**:
+  - `POST /api/properties` - Creates a new property.
+  - `GET /api/properties/{id}` - Retrieves a property by ID.
+  - `PUT /api/properties/{id}` - Updates an existing property.
+  - `DELETE /api/properties/{id}` - Deletes a property by ID.
+  - `GET /api/properties` - Retrieves all properties.
+
+To interact with the API, you can use tools such as `curl`, `wget`, or any API client like Postman. Here's an example using `curl` to fetch all agents:
+
+```bash
+curl -u user:password http://54.92.236.158:8080/api/agents
+```
+
+Please ensure that your requests are made over HTTPS in a production environment to secure data transmission.
+
 ## Getting Started
 
 ### Prerequisites
