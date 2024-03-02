@@ -76,7 +76,7 @@ Please ensure that your requests are made over HTTPS in a production environment
 
 1. Clone the repository
 ```bash
-git clone https://github.com/<your-username>/realestateapi.git
+git clone https://github.com/EJ-Lan/realestateapi.git
 ```
 2. Navigate to the project directory
 ```bash
